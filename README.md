@@ -12,8 +12,10 @@ RiceCooker can take public/unlisted YouTube playlists or singular songs, downloa
 ![image](https://github.com/FavourAdekola/RiceCooker/assets/100747801/afa0f546-5bd4-49a8-9d2e-3bf7601f730f)
 
 ### Queue
-Rice Cooker allows a near-infinite number of items to be queued into the music player. The queue can be viewed and edited to some extent, such as shuffling and removing items from the queue. 
+Rice Cooker allows a near-infinite number of items to be queued into the music player. The queue can be viewed and edited to some extent, such as shuffling and removing items from the queue.
+
 ![image](https://github.com/FavourAdekola/RiceCooker/assets/100747801/8917c3ae-dd43-4f67-8a46-7d319bca91f9)
+
 ![image](https://github.com/FavourAdekola/RiceCooker/assets/100747801/a0186a53-d349-4e97-b4e2-3d3abb96848d)
 
 
