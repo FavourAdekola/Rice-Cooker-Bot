@@ -58,7 +58,24 @@ def run_discord_bot():
         channel = str(message.channel)
 
         await bot.process_commands(message)
-        await send_message(message,user_message, is_private=False )
+        
+        if username != "noximation":
+            await send_message(message,user_message, is_private=False )
+
+
+    @bot.command(name="delete")
+    async def delete(ctx: commands.Context, *,num: int):
+
+        if ctx.message.author.guild_permissions.manage_messages and num <= 100:
+            await ctx.channel.purge(limit = num +1)
+            await ctx.send(f"Deleted {num} messages.", delete_after=5)
+        else:
+            await ctx.send("You can't do that! :shushing_face: :deaf_person: ")
+
+    @bot.command(name="mog")
+    async def mogging(ctx: commands.Context):
+        await ctx.send(":shushing_face: :deaf_person:")
+
 
 
     

@@ -273,8 +273,8 @@ class VoiceState:
                     self.bot.loop.create_task(self.stop())
                     return
             else:
-                await self._ctx.voice_state.songs.put(Song(self.current.source))
-                await self._ctx.send('Enqueued {}'.format(str(self.current.source)))
+                await self._ctx.voice_state.songs.put(self.current.source)
+
 
                 self.current = await self.songs.get()
                 print("LOOPING")
@@ -282,6 +282,7 @@ class VoiceState:
 
             self.current.source.volume = self._volume
             self.voice.play(self.current.source, after=self.play_next_song)
+            print("WTH")
             await self.current.source.channel.send(embed=self.current.create_embed())
             print("Playing Next Song")
 
