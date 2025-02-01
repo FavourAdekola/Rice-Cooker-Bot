@@ -5,13 +5,13 @@ import math
 import random
 
 import discord
-import youtube_dl
+import yt_dlp
 from async_timeout import timeout
 from discord.ext import commands
 
 
 # Silence useless bug reports messages
-youtube_dl.utils.bug_reports_message = lambda: ''
+yt_dlp.utils.bug_reports_message = lambda: ''
 
 
 class VoiceError(Exception):
@@ -44,7 +44,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         'options': '-vn',
     }
 
-    ytdl = youtube_dl.YoutubeDL(YTDL_OPTIONS)
+    ytdl = yt_dlp.YoutubeDL(YTDL_OPTIONS)
 
     def __init__(self, ctx: commands.Context, source: discord.FFmpegPCMAudio, *, data: dict, volume: float = 0.5):
         super().__init__(source, volume)
@@ -258,33 +258,22 @@ class VoiceState:
     async def audio_player_task(self):
         while True:
             self.next.clear()
-            print("Song Ended?")
-
+            
             if not self.loop:
                 # Try to get the next song within 3 minutes.
-                # If no song will be added to the queue in time,
-                # the player will disconnect due to performance
-                # reasons.
                 try:
                     async with timeout(180):  # 3 minutes
-                        print("Gonna Play Next Song")
                         self.current = await self.songs.get()
                 except asyncio.TimeoutError:
                     self.bot.loop.create_task(self.stop())
                     return
             else:
-                await self._ctx.voice_state.songs.put(self.current.source)
-
-
-                self.current = await self.songs.get()
-                print("LOOPING")
-
+                # Simply replay the current song
+                pass  # Keep `self.current` as is to loop it
 
             self.current.source.volume = self._volume
             self.voice.play(self.current.source, after=self.play_next_song)
-            print("WTH")
             await self.current.source.channel.send(embed=self.current.create_embed())
-            print("Playing Next Song")
 
             await self.next.wait()
 

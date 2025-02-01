@@ -24,4 +24,6 @@ def handle_response(message) -> str:
                 return 'https://tenor.com/view/i-asked-meme-gumball-gif-23125464'
             if p_message.find('based') > -1:
                 return 'Based? Based on what?'
+            if p_message.find('green') > -1:
+                return "https://tenor.com/view/rizz-hoop-peter-griffin-green-fn-gif-16271132247808270949"
 

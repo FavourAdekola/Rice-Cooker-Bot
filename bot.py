@@ -9,14 +9,17 @@ import re
 from urllib import parse, request
 import os
 import asyncio
-from youtube_dl import YoutubeDL
+from yt_dlp import YoutubeDL
 from music_cog import music_cog
 from info import TOKEN
 
 async def send_message(message, user_message, is_private):
     try:
         response = responses.handle_response(user_message)
-        await message.author.send(response)  if is_private else await message.channel.send(response)
+        if response != "https://tenor.com/view/rizz-hoop-peter-griffin-green-fn-gif-16271132247808270949":
+            await message.author.send(response)  if is_private else await message.channel.send(response)
+        else:
+            await message.author.send(response, delete_after=5) if is_private else await message.channel.send(response, delete_after=5)
     except Exception as e:
         print(e)
 
@@ -59,8 +62,7 @@ def run_discord_bot():
 
         await bot.process_commands(message)
         
-        if username != "noximation":
-            await send_message(message,user_message, is_private=False )
+        await send_message(message,user_message, is_private=False )
 
 
     @bot.command(name="delete")
